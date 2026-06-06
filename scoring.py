@@ -112,7 +112,7 @@ def score_debaters(topic, diarization_result):
             "unique_points": unique_count
         }
     
-    # ✅ NEW: Convert speaker keys to named segments
+    #  NEW: Convert speaker keys to named segments
     named_segments = {}
     speaker_count = 0
     for speaker in speaker_segments:
@@ -120,13 +120,13 @@ def score_debaters(topic, diarization_result):
         named_segments[name] = speaker_segments[speaker]
         speaker_count += 1
 
-    return results, named_segments  # ✅ Now returns both
+    return results, named_segments  #  Now returns both
 
 # =========================
 # FORMAT OUTPUT
 # =========================
 def format_scores(topic, results, speaker_segments):
-    output = f"📌 Topic: {topic}\n"
+    output = f" Topic: {topic}\n"
     output += "=" * 40 + "\n\n"
     
     sorted_results = sorted(results.items(), key=lambda x: x[1]["final_score"], reverse=True)
