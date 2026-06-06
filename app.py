@@ -86,7 +86,7 @@ def run_alignment(result, audio, device):
                 device=device
             )
         else:
-            print(f"⚠️ No alignment model for '{language}' — skipping")
+            print(f" No alignment model for '{language}' — skipping")
             return result
 
         result = whisperx.align(
@@ -96,7 +96,7 @@ def run_alignment(result, audio, device):
             audio,
             device
         )
-        print(f"✅ Alignment Complete for: {language}")
+        print(f" Alignment Complete for: {language}")
 
         del model_a
         if torch.cuda.is_available():
@@ -105,7 +105,7 @@ def run_alignment(result, audio, device):
         return result
 
     except Exception as e:
-        print(f"⚠️ Alignment failed: {str(e)} — continuing without alignment")
+        print(f" Alignment failed: {str(e)} — continuing without alignment")
         return result
 
 # =====================================
@@ -127,7 +127,7 @@ def process_audio(audio_file, youtube_url):
             audio_path = audio_file.name
 
         else:
-            return "❌ Please upload a file or enter a YouTube URL."
+            return " Please upload a file or enter a YouTube URL."
 
         print("\nAudio Path:", audio_path)
 
@@ -151,7 +151,7 @@ def process_audio(audio_file, youtube_url):
         )
 
         detected_language = result_original["language"]
-        print(f"✅ Detected Language: {detected_language}")
+        print(f" Detected Language: {detected_language}")
 
         # Step 2 — translate to English if not English
         if detected_language != "en":
@@ -163,11 +163,11 @@ def process_audio(audio_file, youtube_url):
                 task="translate"
             )
             result["language"] = "en"
-            print("✅ Translation Complete")
+            print(" Translation Complete")
             
         else:
             result = result_original
-            print("✅ Already English — skipping translation")
+            print(" Already English — skipping translation")
 
         # ---------------------------------
         # ALIGNMENT
@@ -184,7 +184,7 @@ def process_audio(audio_file, youtube_url):
             seg["text"] for seg in result["segments"]
         ])
 
-        print("✅ Transcript Ready")
+        print(" Transcript Ready")
 
         # ---------------------------------
         # CLEANUP
@@ -196,7 +196,7 @@ def process_audio(audio_file, youtube_url):
         return transcript
 
     except Exception as e:
-        return f"❌ Error:\n{str(e)}"
+        return f" Error:\n{str(e)}"
 
 # =====================================
 # GRADIO INTERFACE
@@ -226,7 +226,7 @@ app = gr.Interface(
         show_copy_button=True
     ),
 
-    title="🏟️ GD Arena",
+    title=" GD Arena",
     description="Upload audio and get the transcript!"
 )
 
