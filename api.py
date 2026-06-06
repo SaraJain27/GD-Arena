@@ -65,7 +65,7 @@ def run_alignment(result, audio, device):
                 device=device
             )
         else:
-            print(f"⚠️ No alignment for {language} — skipping")
+            print(f" No alignment for {language} — skipping")
             return result
 
         result = whisperx.align(
@@ -83,7 +83,7 @@ def run_alignment(result, audio, device):
         return result
 
     except Exception as e:
-        print(f"⚠️ Alignment failed: {e}")
+        print(f" Alignment failed: {e}")
         return result
 
 # =====================================
@@ -117,11 +117,11 @@ async def transcribe(file: UploadFile = File(...)):
             batch_size=16
         )
         detected_language = result_original["language"]
-        print(f"✅ Detected Language: {detected_language}")
+        print(f" Detected Language: {detected_language}")
 
         # Step 5 — translate to English if needed
         if detected_language != "en":
-            print(f"🔄 Translating {detected_language} to English...")
+            print(f" Translating {detected_language} to English...")
             result = model.transcribe(
                 audio,
                 language=None,
@@ -129,7 +129,7 @@ async def transcribe(file: UploadFile = File(...)):
                 task="translate"
             )
             result["language"] = "en"
-            print("✅ Translation Complete")
+            print(" Translation Complete")
         else:
             result = result_original
 
