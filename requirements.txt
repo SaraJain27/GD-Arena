@@ -78,6 +78,7 @@ jupyter_core==5.8.1
 keras==3.12.1
 kiwisolver==1.5.0
 libclang==18.1.1
+librosa==0.11.0
 lightning==2.6.1
 lightning-utilities==0.15.3
 llvmlite==0.47.0
